@@ -88,7 +88,24 @@ struct U
     float val1 { 0 }, val2 { 0 };
     float multiply(float* uVal)      //12
     {
-        // 12) replicate the functionality of <structName2>'s static function by implementing a member function in U that does the same thing.
+        if( uVal != nullptr )
+        {
+            std::cout << "U's val1 value: " << val1 << std::endl;
+            val1 = *uVal;
+            std::cout << "U's val1 updated value: " << val1 << std::endl;
+
+            while ( std::abs( val2 - val1 ) > 0.001f )
+            {
+                ++val2;
+            }
+
+            std::cout << "U's val2 updated value: " << val2 << std::endl;
+
+            return val2 * val1;
+        }
+
+        std::cout << "Error, arguments return nullptr.\n";    
+        return val1;
     }
 };
 
@@ -101,18 +118,17 @@ struct StaticStuff
             std::cout << "U's val1 value: " << that->val1 << std::endl;
             that->val1 = *newVal;
             std::cout << "U's val1 updated value: " << that->val1 << std::endl;
-            
-            int i = 1;
 
-            while( std::abs(that->val2 - that->val1) > 0.001f ) // std::abs look this up
+            while( std::abs(that->val2 - that->val1) > 0.001f )
             {                                                                           
-                //++i
-                
-                that->val2 += i;
+                ++that->val2;
             }
             std::cout << "U's val2 updated value: " << that->val2 << std::endl;
             return that->val2 * that->val1;
         }
+
+        std::cout << "Error, arguments return nullptr.\n";    
+        return that->val2;
     }
 };
 
@@ -129,12 +145,14 @@ int main()
 
     U first;
     float updatedValue = 5.f;
+    
     float productFirst = StaticStuff::staticMultiply( &first, &updatedValue);
     std::cout << "[static func] First's multiplied values: " << productFirst << std::endl;                  //11
-    
+     
     U second;
-    std::cout << "[member func] Second's multiplied values: " << second.multiply( &updatedValue ) << std::endl;
-}
+    float productSecond = second.multiply( &updatedValue );
+    std::cout << "[member func] Second's multiplied values: " << productSecond << std::endl;
+ }
 
         
         
