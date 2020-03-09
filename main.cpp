@@ -63,7 +63,7 @@ struct T  // Declaring a Class of objects that contains a value and a name2
     char value;
     std::string name;
 
-    T(char v, const char* myName)   //1
+    T(char v, const char* myName)   //1     was thrown off by the const char*
     {
         value = v; //2
         name = myName; //3
@@ -82,39 +82,39 @@ struct Compare                                //4  A class of objects that can c
         return nullptr;
     }
 };
-/* <---- delete
+
 struct U
 {
-    float <#name1#> { 0 }, <#name2#> { 0 };
-    <#returnType#> <#memberFunction#>(<#type name#>* <#updatedValue#>)      //12
+    float val1 { 0 }, val2 { 0 };
+    float multiply(float* uVal)      //12
     {
-        
+        // 12) replicate the functionality of <structName2>'s static function by implementing a member function in U that does the same thing.
     }
 };
-<---- delete  */ 
 
-/* <---- delete
-
-struct <#structname2#>
+struct StaticStuff
 {
-    static <#returntype#> <#staticFunctionA#>(U* that, <#type name#>* <#updatedValue#> )        //10
+    static float staticMultiply(U* that, float* newVal )        //10
     {
-        std::cout << "U's <#name1#> value: " << that-><#name1#> << std::endl;
-        that-><#name1#> = <#updatedValue#>;
-        std::cout << "U's <#name1#> updated value: " << that-><#name1#> << std::endl;
-        while( std::abs(that-><#name2#> - that-><#name1#>) > 0.001f )
-        {                                                                           */
-            /*
-             write something that makes the distance between that-><#name2#> and that-><#name1#> get smaller
-             */
-             /* <---- delete 2nd coment thing
-            that-><#name2#> += ;
+        if( that != nullptr && newVal != nullptr)
+        {
+            std::cout << "U's val1 value: " << that->val1 << std::endl;
+            that->val1 = *newVal;
+            std::cout << "U's val1 updated value: " << that->val1 << std::endl;
+            
+            int i = 1;
+
+            while( std::abs(that->val2 - that->val1) > 0.001f ) // std::abs look this up
+            {                                                                           
+                //++i
+                
+                that->val2 += i;
+            }
+            std::cout << "U's val2 updated value: " << that->val2 << std::endl;
+            return that->val2 * that->val1;
         }
-        std::cout << "U's <#name2#> updated value: " << that-><#name2#> << std::endl;
-        return that-><#name2#> * that-><#name1#>;
     }
 };
-*/  // <--- delete this
 
 int main()
 {
@@ -123,15 +123,17 @@ int main()
     
     Compare f;                                            //7
     auto* smaller = f.compare( &a, &b );                              //8
+
+    if( smaller != nullptr )
     std::cout << "the smaller one is << " << smaller->name << std::endl; //9
- /* //<---- delete  
-    U <#name3#>;
+
+    U first;
     float updatedValue = 5.f;
-    std::cout << "[static func] <#name3#>'s multiplied values: " << <#structname2#>::<#staticFunctionA#>( , ) << std::endl;                  //11
+    float productFirst = StaticStuff::staticMultiply( &first, &updatedValue);
+    std::cout << "[static func] First's multiplied values: " << productFirst << std::endl;                  //11
     
-    U <#name4#>;
-    std::cout << "[member func] <#name4#>'s multiplied values: " << <#name4#>.<#memberFunction#>( &updatedValue ) << std::endl;
-//<---- delete */ 
+    U second;
+    std::cout << "[member func] Second's multiplied values: " << second.multiply( &updatedValue ) << std::endl;
 }
 
         
