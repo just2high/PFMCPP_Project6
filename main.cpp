@@ -58,23 +58,31 @@ Create a branch named Part1
 
 #include <iostream>
 #include <string>
-struct T
+struct T  // Declaring a Class of objects that contains a value and a name2
 {
-    T(<#type name#> v, const char* <#variable name#>)   //1
-    //2
-    //3
-};
+    char value;
+    std::string name;
 
-struct <#structName1#>                                //4
-{
-    <#type name#> compare(<#type name#> a, <#type name#> b) //5
+    T(char v, const char* myName)   //1
     {
-        if( a->value < b->value ) return a;
-        if( a->value > b->value ) return b;
-        return nullptr;
+        value = v; //2
+        name = myName; //3
     }
 };
 
+struct Compare                                //4  A class of objects that can compare objects of type T
+{
+    T* compare(T* a, T* b) //5  Comparing the member variable inside the T objects and returning the smaller one, but with pointers instead of copying.  Arguments should be addresses
+    {
+        if ( a != nullptr && b != nullptr )
+        {
+           if( a->value < b->value ) return a;
+            if( a->value > b->value ) return b;
+        }
+        return nullptr;
+    }
+};
+/* <---- delete
 struct U
 {
     float <#name1#> { 0 }, <#name2#> { 0 };
@@ -83,6 +91,9 @@ struct U
         
     }
 };
+<---- delete  */ 
+
+/* <---- delete
 
 struct <#structname2#>
 {
@@ -92,32 +103,35 @@ struct <#structname2#>
         that-><#name1#> = <#updatedValue#>;
         std::cout << "U's <#name1#> updated value: " << that-><#name1#> << std::endl;
         while( std::abs(that-><#name2#> - that-><#name1#>) > 0.001f )
-        {
+        {                                                                           */
             /*
              write something that makes the distance between that-><#name2#> and that-><#name1#> get smaller
              */
+             /* <---- delete 2nd coment thing
             that-><#name2#> += ;
         }
         std::cout << "U's <#name2#> updated value: " << that-><#name2#> << std::endl;
         return that-><#name2#> * that-><#name1#>;
     }
 };
-        
+*/  // <--- delete this
+
 int main()
 {
-    T <#name1#>( , );                                             //6
-    T <#name2#>( , );                                             //6
+    T a( 'b', "A" );                                             //6
+    T b( 'f', "B" );                                             //6
     
-    <#structName1#> f;                                            //7
-    auto* smaller = f.compare( , );                              //8
+    Compare f;                                            //7
+    auto* smaller = f.compare( &a, &b );                              //8
     std::cout << "the smaller one is << " << smaller->name << std::endl; //9
-    
+ /* //<---- delete  
     U <#name3#>;
     float updatedValue = 5.f;
     std::cout << "[static func] <#name3#>'s multiplied values: " << <#structname2#>::<#staticFunctionA#>( , ) << std::endl;                  //11
     
     U <#name4#>;
     std::cout << "[member func] <#name4#>'s multiplied values: " << <#name4#>.<#memberFunction#>( &updatedValue ) << std::endl;
+//<---- delete */ 
 }
 
         
