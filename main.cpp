@@ -76,7 +76,7 @@ struct Compare                                //4  A class of objects that can c
     {
         if ( a != nullptr && b != nullptr )
         {
-           if( a->value < b->value ) return a;
+            if( a->value < b->value ) return a;
             if( a->value > b->value ) return b;
         }
         return nullptr;
