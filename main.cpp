@@ -96,7 +96,14 @@ struct U
 
             while ( std::abs( val2 - val1 ) > 0.001f )
             {
-                ++val2;
+                if( std::abs( val2 ) > std::abs( val1) )
+                {
+                    ++val1;
+                }
+                else
+                {
+                    ++val2;
+                }
             }
 
             std::cout << "U's val2 updated value: " << val2 << std::endl;
@@ -120,8 +127,15 @@ struct StaticStuff
             std::cout << "U's val1 updated value: " << that->val1 << std::endl;
 
             while( std::abs(that->val2 - that->val1) > 0.001f )
-            {                                                                           
-                ++that->val2;
+            {
+                if( std::abs( that->val2 ) > std::abs(that->val1) )
+                {
+                    ++that->val1;
+                }
+                else                                                                           
+                {
+                    ++that->val2;
+                }
             }
             std::cout << "U's val2 updated value: " << that->val2 << std::endl;
             return that->val2 * that->val1;
@@ -145,11 +159,12 @@ int main()
 
     U first;
     float updatedValue = 5.f;
-    
+
     float productFirst = StaticStuff::staticMultiply( &first, &updatedValue);
     std::cout << "[static func] First's multiplied values: " << productFirst << std::endl;                  //11
      
     U second;
+
     float productSecond = second.multiply( &updatedValue );
     std::cout << "[member func] Second's multiplied values: " << productSecond << std::endl;
  }
