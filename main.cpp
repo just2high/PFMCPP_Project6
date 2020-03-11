@@ -108,7 +108,7 @@ int main()
     auto* smaller = f.compare( a, b );                              //8
 
     if( smaller != nullptr )
-    std::cout << "the smaller one is << " << smaller->name << std::endl; //9
+        std::cout << "the smaller one is << " << smaller->name << std::endl; //9
 
     U first;
     float updatedValue = 5.f;
